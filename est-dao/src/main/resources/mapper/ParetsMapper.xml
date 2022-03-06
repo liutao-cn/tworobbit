@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.t18.est.mapper.ParetsMapper">
+
+    <resultMap id="BaseResultMap" type="cn.t18.est.pojo.Parets">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="modelId" column="modelId" jdbcType="BIGINT"/>
+            <result property="paretsName" column="paretsName" jdbcType="VARCHAR"/>
+            <result property="price" column="price" jdbcType="DECIMAL"/>
+            <result property="supplier" column="supplier" jdbcType="VARCHAR"/>
+            <result property="img" column="img" jdbcType="VARCHAR"/>
+            <result property="isOrign" column="isOrign" jdbcType="INTEGER"/>
+            <result property="createdUserId" column="createdUserId" jdbcType="BIGINT"/>
+            <result property="updatedUserId" column="updatedUserId" jdbcType="BIGINT"/>
+            <result property="creatdTime" column="creatdTime" jdbcType="TIMESTAMP"/>
+            <result property="updatedTime" column="updatedTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,modelId,paretsName,
+        price,supplier,img,
+        isOrign,createdUserId,updatedUserId,
+        creatdTime,updatedTime,isDelete
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from parets
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from parets
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.t18.est.pojo.Parets" useGeneratedKeys="true">
+        insert into parets
+        ( id,modelId,paretsName
+        ,price,supplier,img
+        ,isOrign,createdUserId,updatedUserId
+        ,creatdTime,updatedTime,isDelete
+        )
+        values (#{id,jdbcType=BIGINT},#{modelId,jdbcType=BIGINT},#{paretsName,jdbcType=VARCHAR}
+        ,#{price,jdbcType=DECIMAL},#{supplier,jdbcType=VARCHAR},#{img,jdbcType=VARCHAR}
+        ,#{isOrign,jdbcType=INTEGER},#{createdUserId,jdbcType=BIGINT},#{updatedUserId,jdbcType=BIGINT}
+        ,#{creatdTime,jdbcType=TIMESTAMP},#{updatedTime,jdbcType=TIMESTAMP},#{isDelete,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.t18.est.pojo.Parets" useGeneratedKeys="true">
+        insert into parets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="modelId != null">modelId,</if>
+                <if test="paretsName != null">paretsName,</if>
+                <if test="price != null">price,</if>
+                <if test="supplier != null">supplier,</if>
+                <if test="img != null">img,</if>
+                <if test="isOrign != null">isOrign,</if>
+                <if test="createdUserId != null">createdUserId,</if>
+                <if test="updatedUserId != null">updatedUserId,</if>
+                <if test="creatdTime != null">creatdTime,</if>
+                <if test="updatedTime != null">updatedTime,</if>
+                <if test="isDelete != null">isDelete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=BIGINT},</if>
+                <if test="modelId != null"> #{modelId,jdbcType=BIGINT},</if>
+                <if test="paretsName != null"> #{paretsName,jdbcType=VARCHAR},</if>
+                <if test="price != null"> #{price,jdbcType=DECIMAL},</if>
+                <if test="supplier != null"> #{supplier,jdbcType=VARCHAR},</if>
+                <if test="img != null"> #{img,jdbcType=VARCHAR},</if>
+                <if test="isOrign != null"> #{isOrign,jdbcType=INTEGER},</if>
+                <if test="createdUserId != null"> #{createdUserId,jdbcType=BIGINT},</if>
+                <if test="updatedUserId != null"> #{updatedUserId,jdbcType=BIGINT},</if>
+                <if test="creatdTime != null"> #{creatdTime,jdbcType=TIMESTAMP},</if>
+                <if test="updatedTime != null"> #{updatedTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDelete != null"> #{isDelete,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.t18.est.pojo.Parets">
+        update parets
+        <set>
+                <if test="modelId != null">
+                    modelId = #{modelId,jdbcType=BIGINT},
+                </if>
+                <if test="paretsName != null">
+                    paretsName = #{paretsName,jdbcType=VARCHAR},
+                </if>
+                <if test="price != null">
+                    price = #{price,jdbcType=DECIMAL},
+                </if>
+                <if test="supplier != null">
+                    supplier = #{supplier,jdbcType=VARCHAR},
+                </if>
+                <if test="img != null">
+                    img = #{img,jdbcType=VARCHAR},
+                </if>
+                <if test="isOrign != null">
+                    isOrign = #{isOrign,jdbcType=INTEGER},
+                </if>
+                <if test="createdUserId != null">
+                    createdUserId = #{createdUserId,jdbcType=BIGINT},
+                </if>
+                <if test="updatedUserId != null">
+                    updatedUserId = #{updatedUserId,jdbcType=BIGINT},
+                </if>
+                <if test="creatdTime != null">
+                    creatdTime = #{creatdTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updatedTime != null">
+                    updatedTime = #{updatedTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDelete != null">
+                    isDelete = #{isDelete,jdbcType=INTEGER},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.t18.est.pojo.Parets">
+        update parets
+        set 
+            modelId =  #{modelId,jdbcType=BIGINT},
+            paretsName =  #{paretsName,jdbcType=VARCHAR},
+            price =  #{price,jdbcType=DECIMAL},
+            supplier =  #{supplier,jdbcType=VARCHAR},
+            img =  #{img,jdbcType=VARCHAR},
+            isOrign =  #{isOrign,jdbcType=INTEGER},
+            createdUserId =  #{createdUserId,jdbcType=BIGINT},
+            updatedUserId =  #{updatedUserId,jdbcType=BIGINT},
+            creatdTime =  #{creatdTime,jdbcType=TIMESTAMP},
+            updatedTime =  #{updatedTime,jdbcType=TIMESTAMP},
+            isDelete =  #{isDelete,jdbcType=INTEGER}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>

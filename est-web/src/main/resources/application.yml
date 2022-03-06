@@ -1,0 +1,89 @@
+
+spring:
+  #配置数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://116.62.115.185:3306/est?characterEncoding=utf8&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123
+  mvc:
+    format:
+      date: yyyy-MM-dd
+  redis:
+    port: 6379
+    password: 123456
+    host: 192.168.137.1
+
+#扫描mybatis映射文件
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#swagger配置
+swagger:
+  title: 二手兔电商项目
+  description: 二手兔api文档
+  contact:
+    name: 小刘
+    email: xiaoliu@qq.com
+#yml中配置短信常量值信息
+Sms_info_yml:
+  accesskey_id: LTAI5tGdFZ4GKFfrTdzqXik3
+  accesskey_secret: iKBr9ovhnCgXkNeg01mOdsoxWTMvx5
+  sign_name: 金码二手兔
+  template_code: SMS_192541436
+  endpoint: dysmsapi.aliyuncs.com
+
+#https://graph.qq.com/oauth2.0/show?
+  #which=Login&display=pc&response_type=code&client_id=101884596&redirect_uri=ht
+  #tp://www.0769bdqn.com/api/login
+
+  #https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=[YOUR_APP_ID]&client_secret=[YOUR_APP_Key]&code=[The_AUTHORIZATION_CODE]&redirect_uri=[YOUR_REDIRECT_URI]
+  #https://graph.qq.com/oauth2.0/me?access_token=YOUR_ACCESS_TOKEN
+  #https://graph.qq.com/user/get_user_info?access_token=YOUR_ACCESS_TOKEN&oauth_consumer_key=YOUR_APP_ID&openid=YOUR_OPENID
+
+ #QQ登录配置
+qq:
+  client_secret: 1f74ebafbfa647faa58608ca8ca47360 #应用程序密码
+  login_url: https://graph.qq.com/oauth2.0/show?which=Login&display=pc&response_type=code&client_id={}&redirect_uri={}&state={}   #获取qq授权的URL
+  client_id: 101884596   #应用程序的id
+  redirect_uri: http://www.0769bdqn.com/api/login    #重定向的网址
+  get_accesstoken: https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id={}&client_secret={}&code={}&redirect_uri={}   #获取用户的真实token
+  openid_url: https://graph.qq.com/oauth2.0/me?access_token={}   #获取openId的url
+  user_infoUrl: https://graph.qq.com/user/get_user_info?access_token={}&oauth_consumer_key={}&openid={}   #获取用户信息的url
+  success_url: http://localhost:8090/redirect?token={} #登陆成功后重定向的url
+server:
+  port: 8070
+
+# 阿里云的OSS（对象存储服务）配置
+oss:
+  #OSS文件访问域名
+  ossWebUrl: https://ljx-bdqn.oss-cn-beijing.aliyuncs.com/
+  #地域节点
+  endpoint: oss-cn-guangzhou.aliyuncs.com
+  accessKeyId: LTAI5tM4mUo3dVFh7GgXfrFU
+  accessKeySecret: 7Il1If4UYe4OAo7Lm2RhEQY9PtDQoo
+  bucketName: two-rabbit
+  filepath: tworabbit/picture/
+
+#debug: true
+
+alipay:
+  #应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+  app_id: 2021000119623554
+
+  # 商户私钥，您的PKCS8格式RSA2私钥
+  merchant_private_key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCJTIeRB9WgRaDd2i78Klxl7hNBJYvjzItDucLPwghreplPF4RyKIr8bdSAgS6HE1TZEf+5l2OJjflHAe7bD3jUN3VFsBmSnf7wXWfdHqsiqAPDWw1K2+dDH2k3/OGFBYfSFYgP8tOjKUUO5Ix72C91CpCKLbkhPzs32+nfF+/easTIUb22gdqTjK068i9fZCO9XWiDv9tqcEzaMm+hOXOEfPrNMnNw+HrFjnzL4Lp+sNox+H8q2GcIp9sUI/UbThXQr5gYSTF6vrSaKung7BdAdGKjI/icP3r9Rv2iSHAFEiuwhQoiiPY3gttteuOuU5WnaBwXrHxo285JOI27gVVvAgMBAAECggEAfcH3OkQuy8p6+jnqZ1Z1o3dZc4Zsh47G0JXJdnqHM8rruaIU0muIQoZm6f1pHJf8U4dE8D1WEpxUA1Il8chOKDNT2yzdf4nwBUHI7KQ2pFu4dqtjlXmubbDLs1iRSEI0kZzfL5x/dSdL9cQpWRY/AblXgvk2ZNmB6DwqDwnhz5osho9l5m7LgXgZO2o1Pi0GAUwaQ731lM4oYKJPQUYIAk4plX7qlk6P4TKnilmvpiaf5MFf+oM0Js7nob9ESlQovaAaQyaTj2cPD7yOCyR7KH/NOXhsfb5lnGJpitLr/2g9N7aXaIPsdHPCmjnPfQHTapBTGEj8fnYqLTINUPzx4QKBgQC9NSwGbbNjd2RBM699OtIrqQGdiBWGZF1uXo8oUjqqHuE5r+20GswN2Ql7jVxDsciL+VzXvbnOvcbXSyMvIN3MfxpMdfvmNJiHS/VabpJUvX3huuf6dO1KSgL+G9I2eg3KiTm29QmuK6/KZ0z2OhNXpRp1Su42jSzKmRMrebjNhQKBgQC5xFPxbgIyMRLUybcRS2/0BtbOGwBRxVHputQvs3uMcdjpCH0pApS66tZE9oZDhcwMMIRMKaOFo4UgTfaZATWBjbqEnP47gNqhaYWXmh7qHiIh4n7fIbJI4K0A2b2NYGumdpV7nFSYrlvhoGfIi0qpzSHn7WStX2qsrKGGv+ffYwKBgFRQIXIr6Ehmp5I2ifjwAT/bbBDa11yv1MKd+IUrP2EXqZ2fO/mKB2wUTxlzgK3Zx1g4opqwvN/XyYeev+r8Zln+OaXg3YNT5LRFsOu/Yg3I8xNnyn/dIvB70qGRnDcSZJrgU4un3cxzQz6akb0XXA8uT3/9B/HfLxqI4/X3o9ZRAoGALDdFv65uiWHS2KEWmOA6ynuiPzaAEfaEc7yLarsuyhQDDByAJfW+Tus8iveep42+LpyRsMssZ8+vDSxhaLO395kzbwMrJCCcaVUDfj0p5JG9kBEoH5YWqHAJ3az2CCOOG/YXyG9CV4EQz5hte3dkExyHWHvRvc57RpRkcf1VhH8CgYBsCiRI2Tq/u32CxkGkEW2WFj6+kyr8en1ZIR3wnIF3mzOR7wm0mCplAVq+JKOo6SDE6rRTQhU4pihL6OOjK9OROEUo2B6cl5ylyuSP19S2dT8AE7fX/r6BtiL1Xc6RebC8nQG0Km6wUZ20ZjbH5sYRF96EpuOqJ2WHE3ClcIvQNw==
+  # 支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArxZuPKHNZin7O1FhR4Hf9kUIR2SUsAkYvNff984DS5qkvwgoInyoEnMDVK5uBr0wM4Wkr33fTyml8UsuQgMKBtvy4rVtofc8tX4Rblh8QbZXlwQLJpst6QdViaNp8aKyqipHRNtNo8spLywB2IruozG5Qd3Kx7WM52GRrk6aottBBo3Kf1xjXYaCXnY84pcgyw80MVyjRHDyDdQgAjcb1hTqjvqXWFxn3EGPdEl7HrFBJkRyBa7h6s1mLAYtGUoLUK0oAYLX72Ffm9LJ+7xgE6ozD2zTpizSzHSCIYjO6k4V1H5B1SEUyEMrA4HYE33N8n78FfvS5o8n/f8G3aOmIQIDAQAB
+  # 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  notify_url : http://23va7b.natappfree.cc/api/pay/aliPay/notify
+  # 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
+  return_url: http://23va7b.natappfree.cc/api/pay/aliPay/return
+
+  # 签名方式
+  sign_type: RSA2
+
+  # 字符编码格式
+  charset: utf-8
+
+  # 支付宝网关
+  gatewayUrl: https://openapi.alipaydev.com/gateway.do
